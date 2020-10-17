@@ -2,8 +2,24 @@
 window.addEventListener("load",initializeApp);
 var localUser;
 var db;
+var screenNameButton;
+var screenName;
 
 function initializeApp(){
+    screenNameButton = document.querySelector("#screenNameButton");
+    screenNameButton.addEventListener("click", () => {
+        var screenNameCtrl = document.querySelector("#screenNameText");
+        screenName = screenNameCtrl.value;
+        if (screenName !== ""){
+            localUser.screenName = screenName;
+            updateUser();
+        }
+        else{
+            alert("Please add a screen name and try again.");
+            screenNameCtrl.focus();
+            return;
+        }
+    });
     initializeFirebase();
     localUser = getLocalUser();
     if (localUser === null){
@@ -23,7 +39,19 @@ function displayUserId(userId){
 
 function addLocalUser(){
     localUser = new User(uuidv4());
+    saveUserToLocalStorage();
+}
+
+function saveUserToLocalStorage(){
     localStorage.setItem("user",JSON.stringify(localUser));
+}
+
+function updateUser(){
+    // updates the localUser in localStorage and
+    // update the user at firebase
+    saveUserToLocalStorage();
+    var docRef = db.collection("users").doc(localUser.id);
+    docRef.update(JSON.parse(JSON.stringify(localUser)));
 }
 
 function getLocalUser(){
