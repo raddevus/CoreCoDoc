@@ -1,12 +1,24 @@
 
 window.addEventListener("load",initializeApp);
 var localUser;
+var db;
 
 function initializeApp(){
+    initializeFirebase();
     localUser = getLocalUser();
     if (localUser === null){
         addLocalUser();
+        saveUserToFirebase();
     }
+    displayUserId(localUser.id)
+    loadUserFromFirebase();
+
+}
+
+function displayUserId(userId){
+    // Add secret userId to password text box so user will know
+    // it is there and can display it if she wants to.
+    document.querySelector("#secretId").value = userId;
 }
 
 function addLocalUser(){
@@ -25,21 +37,32 @@ function getLocalUser(){
     return user;
 }
 
-function addUser(){
-    db.collection("users").add({
-        first: "Ada",
-        last: "Lovelace",
-        born: 1815
-    })
-    .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
+function loadUserFromFirebase(){
+    var docRef = db.collection("users").doc(localUser.id);
+
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+}
+
+function saveUserToFirebase(){
+    db.collection("users").doc(localUser.id.toString()).set(JSON.parse(JSON.stringify(localUser)))
+    .then(function() {
+        console.log("Document written successfully: " + localUser.id);
     })
     .catch(function(error) {
         console.error("Error adding document: ", error);
     });
 }
 
-function intializeFirebase(){
+function initializeFirebase(){
     // Initialize Cloud Firestore through Firebase
     firebase.initializeApp({
         apiKey: apiKey,
@@ -47,7 +70,7 @@ function intializeFirebase(){
         projectId: 'corecodoc'
         });
   
-    var db = firebase.firestore();
+    db = firebase.firestore();
     console.log(db);
 }
 
