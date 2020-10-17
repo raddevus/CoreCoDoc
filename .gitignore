@@ -44,5 +44,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-# ignore my secrets.gh file which contains apikey
-*.gh
+# ignore my secrets.ig file which contains apikey
+*.ig
