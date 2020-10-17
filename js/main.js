@@ -1,9 +1,28 @@
 
 window.addEventListener("load",initializeApp);
+var localUser;
 
 function initializeApp(){
-    alert("I'm initialized.");
-    console.log(uuidv4());
+    localUser = getLocalUser();
+    if (localUser === null){
+        addLocalUser();
+    }
+}
+
+function addLocalUser(){
+    localStorage.setItem("user",JSON.stringify({"id":uuidv4()}));
+}
+
+function getLocalUser(){
+    console.log("getLocalUser()...");
+    var user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
+    console.log(user == "null");
+    if (user === null){
+        console.log("There is no user key.");
+        return null;
+    }
+    return user;
 }
 
 function addUser(){
