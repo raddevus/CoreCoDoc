@@ -10,14 +10,14 @@ function initializeApp(){
 }
 
 function addLocalUser(){
-    localStorage.setItem("user",JSON.stringify({"id":uuidv4()}));
+    localUser = new User(uuidv4());
+    localStorage.setItem("user",JSON.stringify(localUser));
 }
 
 function getLocalUser(){
     console.log("getLocalUser()...");
     var user = JSON.parse(localStorage.getItem("user"));
     console.log(user);
-    console.log(user == "null");
     if (user === null){
         console.log("There is no user key.");
         return null;
@@ -56,4 +56,12 @@ function uuidv4() {
     return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
     );
+}
+
+class User{
+    constructor(id){
+        this.id = id;
+        this.screenName = "";
+        this.created = new Date();
+    }
 }
