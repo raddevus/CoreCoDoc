@@ -9,14 +9,22 @@ class Competency{
         this.value = item.value;
         this.text = item.text;
         this.description = item.description;
+        this.examples = item.examples;
     }
     toString(){
         return this.text;
     }
 }
 
+const sm01Examples = [
+    "Is confident of own ability to accomplish goals",
+    "Presents self crisply and impressively",
+    "Is willing to speak up to the right person or group at the right time, when he/she disagrees with a decision or strategy",
+    "Approaches challenging tasks with a “can-do” attitude"
+];
+
 const selfManagementCompetencies = [
-    new Competency({value:"sm-01",text:"Self confidence",description:"Faith in one’s own ideas and capability to be successful; willingness to take an independent position in the face of opposition."}),
+    new Competency({value:"sm-01",text:"Self confidence",description:"Faith in one’s own ideas and capability to be successful; willingness to take an independent position in the face of opposition.",examples:sm01Examples}),
     new Competency({value:"sm-02",text:"Stress management",description:"The ability to keep functioning effectively when under pressure and maintain self control in the face of hostility or provocation."}),
     new Competency({value:"sm-03",text:"Personal credibility",description:"Demonstrated concern that one be perceived as responsible, reliable, and trustworthy."}),
     new Competency({value:"sm-04",text:"Flexibility",description:"Openness to different and new ways of doing things; willingness to modify one’s preferred way of doing things."})
@@ -57,6 +65,7 @@ function setCompetencySelection(){
         return;
     }
     $("#competency").empty();
+    $("#competencyExamples").remove();
     
     // add first item as blank
     $("#competency").append(new Option("", "00-00", false, false));
@@ -65,7 +74,7 @@ function setCompetencySelection(){
         case "cg-01":{
             
             selfManagementCompetencies.map((item) => {
-                var localOption = new Option(item.text, item.value+"^"+item.description, false, false);
+                var localOption = new Option(item.text, JSON.stringify(item), false, false);
                 console.log(localOption);
                 $("#competency").append($(localOption));
                 console.log(item.value + " : " +  item.text);
@@ -74,7 +83,7 @@ function setCompetencySelection(){
         }
         case "cg-02" :{
             dealingWithOthersCompetencies.map((item) => {
-                var localOption = new Option(item.text, item.value+"^"+item.description, false, false);
+                var localOption = new Option(item.text, JSON.stringify(item), false, false);
                 console.log(localOption);
                 $("#competency").append($(localOption));
                 console.log(item.value + " : " +  item.text);
@@ -87,15 +96,43 @@ function setCompetencySelection(){
     }
 }
 
+function addCompetencyExamples(examples){
+
+    for (var x = 0;x < examples.length;x++){
+
+        $('#competencyExamples').append(
+            $(document.createElement('input')).prop({
+            id: 'myCheckBox-'+x,
+            name: 'interest',
+            value: x,
+            type: 'checkbox'
+            })
+        ).append(
+            $(document.createElement('label')).prop({
+            for: 'myCheckBox-'+x
+            }).html(examples[x])
+        ).append(document.createElement('br'));
+    }
+}
+
 function setCompetencyDescription(){
+
     console.log("test");
-    var selectedValue = $("#competency").val();
-    if (selectedValue == "00-00"){
+    // we parse the value back into a Competency object.
+    var currentCompetency = JSON.parse($("#competency").val());
+    console.log(currentCompetency.description);
+    console.log(currentCompetency.examples);
+
+    if (currentCompetency.value == "00-00"){
         $("#competencyDescription").text("");    
     }
-    console.log(selectedValue.split("^")[0]);
-    console.log(selectedValue.split("^")[1]);
     
-    $("#competencyDescription").text(selectedValue.split("^")[1]);
+    $("#competencyDescription").text(currentCompetency.description);
+
+    console.log(currentCompetency.examples);
+     if (currentCompetency.examples !== undefined){
+         addCompetencyExamples(currentCompetency.examples);
+     }
+
 }
 
