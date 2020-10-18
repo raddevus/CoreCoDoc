@@ -7,6 +7,7 @@
         <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-firestore.js"></script>
         <script src="js/secrets.ig" type="application/javascript"></script>
+        <script src="js/helper.js"></script>
         <script src="js/main.js"></script>
         <title>Core Competencies</title>
     </head>
@@ -20,10 +21,19 @@
         <div>
             <label for="competencyGroup">Competency Group:</label>
             <select id="competencyGroup">
-            <option value="cg-00"></option>
+            <option value="00-00"></option>
             <option value="cg-01">Self-management</option>
             <option value="cg-02">Dealing With Others</option>
             <option value="cg-03">Dealing With Business</option>
+            </select> 
+        </div>
+        <div>
+            <label for="competency">Competency:</label>
+            <select id="competency">
+            <option value="cv-00"></option>
+            <option value="cv-01">Self-management</option>
+            <option value="cv-02">Dealing With Others</option>
+            <option value="cv-03">Dealing With Business</option>
             </select> 
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

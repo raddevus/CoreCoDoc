@@ -20,6 +20,7 @@ function initializeApp(){
             return;
         }
     });
+    $("#competencyGroup").on('change', setCompetencySelection);
     initializeFirebase();
     localUser = getLocalUser();
     if (localUser === null){
