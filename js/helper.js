@@ -65,7 +65,7 @@ function setCompetencySelection(){
         return;
     }
     $("#competency").empty();
-    $("#competencyExamples").remove();
+    //$("#competencyExamples").remove();
     
     // add first item as blank
     $("#competency").append(new Option("", "00-00", false, false));
@@ -97,21 +97,22 @@ function setCompetencySelection(){
 }
 
 function addCompetencyExamples(examples){
-
+    console.log(examples.length);
     for (var x = 0;x < examples.length;x++){
-
-        $('#competencyExamples').append(
-            $(document.createElement('input')).prop({
-            id: 'myCheckBox-'+x,
-            name: 'interest',
+        console.log(examples[x]);
+        $("#competencyExamples").append(
+            $(document.createElement("input")).prop({
+            id: "myCheckBox-"+x,
+            name: "interest",
             value: x,
-            type: 'checkbox'
+            type: "checkbox"
             })
-        ).append(
-            $(document.createElement('label')).prop({
-            for: 'myCheckBox-'+x
+        )
+        .append(
+            $(document.createElement("label")).prop({
+            for: "myCheckBox-"+x
             }).html(examples[x])
-        ).append(document.createElement('br'));
+        ).append(document.createElement("br"));
     }
 }
 
@@ -126,7 +127,6 @@ function setCompetencyDescription(){
     var currentCompetency = JSON.parse($("#competency").val());
     
     console.log(currentCompetency.description);
-    console.log(currentCompetency.examples);
     
     $("#competencyDescription").text(currentCompetency.description);
 
