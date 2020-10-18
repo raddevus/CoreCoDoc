@@ -28,6 +28,7 @@ function initializeApp(){
     }
     displayUserId(localUser.id)
     loadUserFromFirebase();
+    displayCurrentScreenName();
 
 }
 
@@ -35,6 +36,14 @@ function displayUserId(userId){
     // Add secret userId to password text box so user will know
     // it is there and can display it if she wants to.
     document.querySelector("#secretId").value = userId;
+}
+
+function displayCurrentScreenName(){
+    // only if the localUser is valid and the screenName is set
+    if (localUser !== null && localUser.screenName != ""){
+        var userView = document.querySelector("#userView");
+        userView.innerHTML = localUser.screenName;
+    }
 }
 
 function addLocalUser(){
