@@ -119,13 +119,14 @@ function setCompetencyDescription(){
 
     console.log("test");
     // we parse the value back into a Competency object.
+    if (document.querySelector("#competency").value === "00-00"){
+        $("#competencyDescription").text("");
+        return;
+    }
     var currentCompetency = JSON.parse($("#competency").val());
+    
     console.log(currentCompetency.description);
     console.log(currentCompetency.examples);
-
-    if (currentCompetency.value == "00-00"){
-        $("#competencyDescription").text("");    
-    }
     
     $("#competencyDescription").text(currentCompetency.description);
 
