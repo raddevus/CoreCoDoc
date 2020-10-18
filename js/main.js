@@ -21,14 +21,15 @@ function initializeApp(){
         }
     });
     $("#competencyGroup").on('change', setCompetencySelection);
-    initializeFirebase();
+    $("#competency").on('change', setCompetencyDescription);
+//    initializeFirebase();
     localUser = getLocalUser();
     if (localUser === null){
         addLocalUser();
         saveUserToFirebase();
     }
     displayUserId(localUser.id)
-    loadUserFromFirebase();
+//    loadUserFromFirebase();
     displayCurrentScreenName();
 
 }
