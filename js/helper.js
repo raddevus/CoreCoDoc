@@ -4,14 +4,14 @@ function setCompetencySelection(){
     $("#examples").remove();
     $("#competencyDescription").text("");
     $("#competency").empty();
-
+    
     if (cgValue == "00-00"){
         // nothing else to do, return;
         return;
     }
-    
     // add first item as blank
-    $("#competency").append(new Option("", "00-00", false, false));
+    $("#competency").append(new Option("select...", "00-00", false, false));
+    
 
     switch (cgValue){
         case "cg-01":{
