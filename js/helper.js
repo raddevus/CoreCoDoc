@@ -2,15 +2,13 @@
 function setCompetencySelection(){
     var cgValue = $("#competencyGroup").val();
     $("#examples").remove();
+    $("#competencyDescription").text("");
+    $("#competency").empty();
+
     if (cgValue == "00-00"){
-        // the blank item was chosen, nothing to do.
-        document.querySelector("#competency").value = "00-00";
-        $("#competencyDescription").text("");
-        $("#competency").empty();
+        // nothing else to do, return;
         return;
     }
-    $("#competency").empty();
-    //$("#competencyExamples").remove();
     
     // add first item as blank
     $("#competency").append(new Option("", "00-00", false, false));
