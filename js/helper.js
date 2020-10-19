@@ -50,19 +50,23 @@ function addCompetencyExamples(examples){
 
     for (var x = 0;x < examples.length;x++){
         console.log(examples[x]);
-        $("#examples").append(
-            $(document.createElement("input")).prop({
-            id: "myCheckBox-"+x,
-            name: "interest",
-            value: x,
-            type: "checkbox"
-            })
-        )
-        .append(
-            $(document.createElement("label")).prop({
-            for: "myCheckBox-"+x
-            }).html(examples[x])
-        ).append(document.createElement("br"));
+
+        $("#examples").append($(document.createElement("div")).prop({
+            class:"form-check noselect",
+            }).append(
+                $(document.createElement("input")).prop({
+                id: "example-"+x,
+                name: "interest",
+                value: x,
+                type: "checkbox",
+                class:"form-check-input" 
+                })
+            ).append(
+                $(document.createElement("label")).prop({
+                for: "example-"+x
+                }).html(examples[x])
+            ).append(document.createElement("br"))
+        );
     }
 }
 
