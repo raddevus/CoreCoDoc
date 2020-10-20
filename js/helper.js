@@ -16,27 +16,25 @@ function setCompetencySelection(){
     switch (cgValue){
         case "cg-01":{
             
-            selfManagementCompetencies.map((item) => {
-                var localOption = new Option(item.text, JSON.stringify(item), false, false);
-                console.log(localOption);
-                $("#competency").append($(localOption));
-                console.log(item.value + " : " +  item.text);
-            });
+            selfManagementCompetencies.map(mapToCompetency);
             break;
         }
         case "cg-02" :{
-            dealingWithOthersCompetencies.map((item) => {
-                var localOption = new Option(item.text, JSON.stringify(item), false, false);
-                console.log(localOption);
-                $("#competency").append($(localOption));
-                console.log(item.value + " : " +  item.text);
-            });
+            dealingWithOthersCompetencies.map(mapToCompetency);
             break;
         }
         case "cg-03":{
-
+            dealingWithBusinessCompetencies.map(mapToCompetency);
+            break;
         }
     }
+}
+
+function mapToCompetency(item){
+    var localOption = new Option(item.text, JSON.stringify(item), false, false);
+    console.log(localOption);
+    $("#competency").append($(localOption));
+    console.log(item.value + " : " +  item.text);
 }
 
 function addCompetencyExamples(examples){
