@@ -118,19 +118,61 @@ const db05Examples = [
 ];
 
 const db06Examples = [
-
+    "Effectively applies technical knowledge to solve a range of problems.",
+    "Possesses an in-depth knowledge and skill in a technical area.",
+    "Develops technical solutions to new or highly complex problems that cannot be solved using existing methods or approaches.",
+    "Is sought out as an expert to provide advice or solutions in his/her technical area.",
+    "Keeps informed about cutting-edge technology in his/her technical area.",
 ];
 
 const db07Examples = [
-
+    "Identifying what needs to be done and takes action before being asked or the situation requires it.",
+    "Does more than what is normally required in a situation.",
+    "Seeks out others involved in a situation to learn their perspectives.",
+    "Takes independent action to change the direction of events.",
 ];
 
 const db08Examples = [
-
+    "Notices and seizes profitable business opportunities.",
+    "Stays abreast of business, industry, and market information that may reveal business opportunities.",
+    "Demonstrates willingness to take calculated risks to achieve business goals.",
+    "Proposes innovative business deals to potential customers, suppliers, and business partners.",
+    "Encourages and supports entrepreneurial behavior in others.",
 ];
 
 const db09Examples = [
+    "Personally develops a new product or service.",
+    "Personally develops a new method or approach.",
+    "Sponsors the development of new products, services, methods, or procedures.",
+    "Proposes new approaches, methods, or technologies.",
+    "Develops better, faster, or less expensive ways to do things.",
+    "Works cooperatively with others to produce innovative solutions.",
+];
 
+const db10Examples = [
+    "Develops challenging but achievable goals.",
+    "Develops clear goals for meetings and projects.",
+    "Maintains commitment to goals in the face of obstacles and frustrations.",
+    "Finds or creates ways to measure performance against goals.",
+    "Exerts unusual effort over time to achieve a goal.",
+    "Has a strong sense of urgency about solving problems and getting work done.",
+];
+
+const db11Examples = [
+    "Sets up procedures to ensure high quality of work (e.g., review meetings).",
+    "Monitors the quality of work.",
+    "Verifies information.",
+    "Checks the accuracy of own and others’ work.",
+    "Develops and uses systems to organize and keep track of information or work progress.",
+    "Carefully prepares for meetings and presentations.",
+    "Organizes information or materials for others.",
+    "Carefully reviews and checks the accuracy of information in work reports (e.g., production, sales, financial performance) provided by management, management information systems, or other individuals and groups.",
+];
+
+const db12Examples = [
+    "Is willing to make decisions in difficult or ambiguous situations, when time is critical.",
+    "Takes charge of a group when it is necessary to facilitate change, overcome an impasse, face issues, or ensure that decisions are made.",
+    "Makes tough decisions (e.g., closing a facility, reducing staff, accepting or rejecting a high-stakes deal).",
 ];
 
 
@@ -142,11 +184,11 @@ const dealingWithBusinessCompetencies = [
     new Competency({value:"db-03",text:"Forward Thinking",description:"The ability to anticipate the implications and consequences of situations and take appropriate action to be prepared for possible contingencies",examples:db03Examples}),
     new Competency({value:"db-04",text:"Conceptual Thinking",description:"The ability to find effective solutions by taking a holistic, abstract, or theoretical perspective.",examples:db04Examples}),
     new Competency({value:"db-05",text:"Strategic Thinking",description:"The ability to analyze the organization’s competitive position by considering market and industry trends, existing and potential customers (internal and external), and strengths and weaknesses as compared to competitors.",examples:db05Examples}),
-    // new Competency({value:"db-06",text:"",description:"",examples:fake0}),
-    // new Competency({value:"db-07",text:"",description:"",examples:fake0}),
-    // new Competency({value:"db-08",text:"",description:"",examples:fake0}),
-    // new Competency({value:"db-09",text:"",description:"",examples:fake0}),
-    // new Competency({value:"db-10",text:"",description:"",examples:fake0}),
-    // new Competency({value:"db-11",text:"",description:"",examples:fake0}),
-    // new Competency({value:"db-12",text:"",description:"",examples:fake0}),
+    new Competency({value:"db-06",text:" Technical Expertise",description:"The ability to demonstrate depth of knowledge and skill in a technical area.",examples:db06Examples}),
+    new Competency({value:"db-07",text:"Initiative",description:"Identifying what needs to be done and doing it before being asked or before the situation requires it.",examples:db07Examples}),
+    new Competency({value:"db-08",text:" Entrepreneurial Orientation",description:"The ability to look for and seize profitable business opportunities; willingness to take calculated risks to achieve business goals.",examples:db08Examples}),
+    new Competency({value:"db-09",text:" Fostering Innovation",description:"The ability to develop, sponsor, or support the introduction of new and improved method, products, procedures, or technologies.",examples:db09Examples}),
+    new Competency({value:"db-10",text:"Results Orientation",description:"The ability to focus on the desired result of one’s own or one’s unit’s work, setting challenging goals, focusing effort on the goals, and meeting or exceeding them.",examples:db10Examples}),
+    new Competency({value:"db-11",text:"Thoroughness",description:"Ensuring that one’s own and others’ work and information are complete and accurate; carefully preparing for meetings and presentations; following up with others to ensure that agreements and commitments have been fulfilled.",examples:db11Examples}),
+    new Competency({value:"db-12",text:"Decisiveness",description:"The ability to make difficult decisions in a timely manner.",examples:db12Examples}),
 ];
