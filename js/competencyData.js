@@ -16,17 +16,29 @@ const sm02Examples = [
     "Manages own behavior to prevent or reduce feelings of stress.",
 ];
 
+const sm03Examples = [
+    "Does what he/she commits to doing.",
+    "Respects the confidentiality of information or concerns shared by others.",
+    "Is honest and forthright with people.",
+    "Carries his/her fair share of the workload.",
+    "Takes responsibility for own mistakes; does not blame others.",
+    "Conveys a command of the relevant facts and information.",
+];
+
+const sm04Examples = [
+    "Is able to see the merits of perspectives other than his/her own.",
+    "Demonstrates openness to new organizational structures, procedures, and technology.",
+    "Switches to a different strategy when an initially selected one is unsuccessful.",
+    "Demonstrates willingness to modify a strongly held position in the face of contrary evidence.",
+];
+
 const selfManagementCompetencies = [
     // ## template follows ##
     // new Competency({value:"sm-00",text:"",description:"",examples:fake0}),
     new Competency({value:"sm-01",text:"Self confidence",description:"Faith in one’s own ideas and capability to be successful; willingness to take an independent position in the face of opposition.",examples:sm01Examples}),
     new Competency({value:"sm-02",text:"Stress management",description:"The ability to keep functioning effectively when under pressure and maintain self control in the face of hostility or provocation.",examples:sm02Examples}),
-    new Competency({value:"sm-03",text:"Personal credibility",description:"Demonstrated concern that one be perceived as responsible, reliable, and trustworthy."}),
-    new Competency({value:"sm-04",text:"Flexibility",description:"Openness to different and new ways of doing things; willingness to modify one’s preferred way of doing things."})
-    // new Competency("sm-01","Self confidence","Faith in one’s own ideas and capability to be successful; willingness to take an independent position in the face of opposition."),
-    // new Competency("sm-02","Stress management","he ability to keep functioning effectively when under pressure and maintain self control in the face of hostility or provocation."),
-    // new Competency("sm-03","Personal credibility","Demonstrated concern that one be perceived as responsible, reliable, and trustworthy."),
-    // new Competency("sm-04","Flexibility","Openness to different and new ways of doing things; willingness to modify one’s preferred way of doing things.")
+    new Competency({value:"sm-03",text:"Personal credibility",description:"Demonstrated concern that one be perceived as responsible, reliable, and trustworthy.",examples:sm03Examples}),
+    new Competency({value:"sm-04",text:"Flexibility",description:"Openness to different and new ways of doing things; willingness to modify one’s preferred way of doing things.",examples:sm04Examples})
 ];
 
 
