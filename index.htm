@@ -21,7 +21,7 @@
                 <legend class="card-img-top the-legend">User Info</legend>
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" for="secretId">Secret Id:</label>
+                        <label class="input-group-text" for="secretId">Secret Id</label>
                     </div>
                     <input class="form-control" id="secretId" type="password">
                     <div class="input-group-append">
@@ -33,18 +33,24 @@
                         </button>
                     </div>
                 </div>
-                <span>screenName:</span><input id="screenNameText" type="text">
-                <button class="btn btn-primary btn-sm" id="screenNameButton">Set ScreenName</button>
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="screenNameText">Screen Name</label>
+                    </div>
+                    <input class="form-control" id="screenNameText" type="text">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary btn-sm" id="screenNameButton">Save</button>
+                    </div>
+                </div>
             </fieldset>
         </div>
-        <span class="nav-right">Current User: <span id="userView"></span></span>
         <h1>Core Competencies</h1>
         
         <div class="row">
             <div class="col-sm-8">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="competencyGroup">Competency Group:</label>
+                    <label class="input-group-text" for="competencyGroup">Competency Group</label>
                 </div>
                 <select class="form-control" id="competencyGroup">
                 <option value="00-00">select...</option>
@@ -59,7 +65,7 @@
             <div class="col-sm-8">
             <div class="input-group">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" for="competency">Competency:</label>
+                        <label class="input-group-text" for="competency">Competency</label>
                     </div>
                     <select class="form-control" id="competency">
                     <option value="00-00"></option>

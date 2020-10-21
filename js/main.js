@@ -56,8 +56,8 @@ function toggleSecret(){
 function displayCurrentScreenName(){
     // only if the localUser is valid and the screenName is set
     if (localUser !== null && localUser.screenName != ""){
-        var userView = document.querySelector("#userView");
-        userView.innerHTML = localUser.screenName;
+        console.log($("#screenNameText").val())
+        $("#screenNameText").val(localUser.screenName);
     }
 }
 
