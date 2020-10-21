@@ -21,26 +21,38 @@
         <input id="secretId" type="password">
         <span>screenName:</span><input id="screenNameText" type="text">
         <button id="screenNameButton">Set ScreenName</button>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="competencyGroup">Competency Group:</label>
+        <div class="row">
+            <div class="col-sm-6">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="competencyGroup">Competency Group:</label>
+                </div>
+                <select class="form-control" id="competencyGroup">
+                <option value="00-00">select...</option>
+                <option value="cg-01">Self-management</option>
+                <option value="cg-02">Dealing With Others</option>
+                <option value="cg-03">Dealing With Business</option>
+                </select> 
             </div>
-            <select class="form-control" id="competencyGroup">
-            <option value="00-00">select...</option>
-            <option value="cg-01">Self-management</option>
-            <option value="cg-02">Dealing With Others</option>
-            <option value="cg-03">Dealing With Business</option>
-            </select> 
-        </div>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="competency">Competency:</label>
             </div>
-            <select class="form-control" id="competency">
-            <option value="00-00"></option>
-            </select> 
         </div>
-        <div id="competencyDescription"></div>
+        <div class="row">
+            <div class="col-sm-6">
+        <div class="input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="competency">Competency:</label>
+                </div>
+                <select class="form-control" id="competency">
+                <option value="00-00"></option>
+                </select> 
+            </div>
+            </div>
+        </div>
+
+        <div class="card" >
+            <h6 id="competencyTitle" class="card-header"></h6>
+            <div class="card-body" id="competencyDescription"></div>
+        </div>
         <div id="competencyExamples"></div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

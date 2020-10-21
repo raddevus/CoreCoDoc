@@ -80,7 +80,7 @@ function setCompetencyDescription(){
     var currentCompetency = JSON.parse($("#competency").val());
     
     console.log(currentCompetency.description);
-    
+    $("#competencyTitle").text(currentCompetency.text);
     $("#competencyDescription").text(currentCompetency.description);
     $("#examples").remove();
 
