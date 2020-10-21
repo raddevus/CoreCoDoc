@@ -16,11 +16,22 @@
     </head>
     <body>
         
+        <div id="userInfoControl">
+            <fieldset class="card the-fieldset">
+                <legend class="card-img-top the-legend">User Info</legend>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="secretId">Secret Id:</label>
+                    </div>
+                    <input class="form-control" id="secretId" type="password">
+                </div>
+                <span>screenName:</span><input id="screenNameText" type="text">
+                <button class="btn btn-primary btn-sm" id="screenNameButton">Set ScreenName</button>
+            </fieldset>
+        </div>
         <span class="nav-right">Current User: <span id="userView"></span></span>
         <h1>Core Competencies</h1>
-        <input id="secretId" type="password">
-        <span>screenName:</span><input id="screenNameText" type="text">
-        <button id="screenNameButton">Set ScreenName</button>
+        
         <div class="row">
             <div class="col-sm-8">
             <div class="input-group">
