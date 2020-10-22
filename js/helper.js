@@ -4,6 +4,7 @@ function setCompetencySelection(){
     $("#examples").remove();
     $("#competencyDescription").text("");
     $("#competency").empty();
+    $("#competencyTitle").text("");
     
     if (cgValue == "00-00"){
         // nothing else to do, return;
@@ -75,6 +76,7 @@ function setCompetencyDescription(){
     if (document.querySelector("#competency").value === "00-00"){
         $("#competencyDescription").text("");
         $("#examples").remove();
+        $("#competencyTitle").text("");
         return;
     }
     var currentCompetency = JSON.parse($("#competency").val());
