@@ -1,5 +1,11 @@
 
+// set of bools which all must be true 
+// before the saveEntryButtonState will be true
+var competencyIsSelected = false;
+var notesHasValue = false;
+
 function setCompetencySelection(){
+    competencyIsSelected = false;
     var cgValue = $("#competencyGroup").val();
     $("#examples").remove();
     $("#competencyDescription").text("");
@@ -7,6 +13,8 @@ function setCompetencySelection(){
     $("#competencyTitle").text("");
     
     if (cgValue == "00-00"){
+        setEntryButtonState(competencyIsSelected
+            && notesHasValue)
         // nothing else to do, return;
         return;
     }
@@ -48,6 +56,8 @@ function addCompetencyExamples(examples){
      )
 
     for (var x = 0;x < examples.length;x++){
+        // NOTE: gen-chk is my special value used for
+        // my script to determine which items are checked.
         console.log(examples[x]);
 
         $("#examples").append($(document.createElement("div")).prop({
@@ -58,11 +68,11 @@ function addCompetencyExamples(examples){
                 name: "interest",
                 value: x,
                 type: "checkbox",
-                class:"form-check-input" 
+                class:"form-check-input gen-chk",
                 })
             ).append(
                 $(document.createElement("label")).prop({
-                for: "example-"+x
+                for: "example-"+x,
                 }).html(examples[x])
             ).append(document.createElement("br"))
         );
@@ -70,13 +80,15 @@ function addCompetencyExamples(examples){
 }
 
 function setCompetencyDescription(){
-
+    competencyIsSelected = false;
     console.log("test");
     // we parse the value back into a Competency object.
     if (document.querySelector("#competency").value === "00-00"){
         $("#competencyDescription").text("");
         $("#examples").remove();
         $("#competencyTitle").text("");
+        setEntryButtonState(competencyIsSelected
+            && notesHasValue)
         return;
     }
     var currentCompetency = JSON.parse($("#competency").val());
@@ -90,6 +102,22 @@ function setCompetencyDescription(){
      if (currentCompetency.examples !== undefined){
          addCompetencyExamples(currentCompetency.examples);
      }
+     competencyIsSelected = true;
+     setEntryButtonState(competencyIsSelected
+        && notesHasValue);
+}
 
+function getAllExampleText(){
+    const allSelectedExamples = [...document.querySelectorAll('.gen-chk:checked')].map(e => $("#"+e.id).parent().text().trim());
+    return allSelectedExamples;
+}
+
+function setEntryButtonState(isEnabled){
+    if (isEnabled){
+        document.querySelector("#SaveEntry").removeAttribute("disabled");
+    }
+    else{
+        document.querySelector("#SaveEntry").setAttribute("disabled","");
+    }
 }
 

@@ -4,8 +4,11 @@ var localUser;
 var db;
 var screenNameButton;
 var screenName;
+var saveEntryButton;
+var notesTextArea;
 
 function initializeApp(){
+    setEntryButtonState(false);
     screenNameButton = document.querySelector("#screenNameButton");
     screenNameButton.addEventListener("click", () => {
         var screenNameCtrl = document.querySelector("#screenNameText");
@@ -23,6 +26,13 @@ function initializeApp(){
     $("#competencyGroup").on("change", setCompetencySelection);
     $("#competency").on("change", setCompetencyDescription);
     $("#revealSecretButton").on("click", toggleSecret)
+    saveEntryButton = document.querySelector("#SaveEntry");
+    saveEntryButton.addEventListener("click", saveEntryButton_Click);
+    notesTextArea = document.querySelector("#notes");
+    
+    notesTextArea.addEventListener("input", notesTextArea_Change);
+    
+
 //    initializeFirebase();
     localUser = getLocalUser();
     if (localUser === null){
@@ -56,7 +66,6 @@ function toggleSecret(){
 function displayCurrentScreenName(){
     // only if the localUser is valid and the screenName is set
     if (localUser !== null && localUser.screenName != ""){
-        console.log($("#screenNameText").val())
         $("#screenNameText").val(localUser.screenName);
     }
 }
@@ -131,6 +140,27 @@ function uuidv4() {
     return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
     );
+}
+
+// *************************************
+// *** Save Entry Work begin
+// *************************************
+
+function notesTextArea_Change(){
+    notesHasValue = (notesTextArea.value.length > 0);
+    setEntryButtonState(competencyIsSelected 
+        && notesHasValue);
+}
+
+function saveEntryButton_Click(){
+    const allExampleText = getAllExampleText();
+    if (allExampleText.length < 1){
+        alert("I can't do this!");
+        return;
+    }
+    else{
+        alert("Yep, you got it : " + allExampleText.join());
+    }
 }
 
 class User{
