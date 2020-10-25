@@ -11,10 +11,11 @@ function setCompetencySelection(){
     $("#competencyDescription").text("");
     $("#competency").empty();
     $("#competencyTitle").text("");
+    displayExamplesHeader(false);
+    setEntryButtonState(competencyIsSelected
+        && notesHasValue)
     
     if (cgValue == "00-00"){
-        setEntryButtonState(competencyIsSelected
-            && notesHasValue)
         // nothing else to do, return;
         return;
     }
@@ -24,7 +25,6 @@ function setCompetencySelection(){
 
     switch (cgValue){
         case "cg-01":{
-            
             selfManagementCompetencies.map(mapToCompetency);
             break;
         }
@@ -41,9 +41,9 @@ function setCompetencySelection(){
 
 function mapToCompetency(item){
     var localOption = new Option(item.text, JSON.stringify(item), false, false);
-    console.log(localOption);
+    // console.log(localOption);
     $("#competency").append($(localOption));
-    console.log(item.value + " : " +  item.text);
+    // console.log(item.value + " : " +  item.text);
 }
 
 function addCompetencyExamples(examples){
@@ -88,7 +88,8 @@ function setCompetencyDescription(){
         $("#examples").remove();
         $("#competencyTitle").text("");
         setEntryButtonState(competencyIsSelected
-            && notesHasValue)
+            && notesHasValue);
+        displayExamplesHeader(false);
         return;
     }
     var currentCompetency = JSON.parse($("#competency").val());
@@ -100,11 +101,13 @@ function setCompetencyDescription(){
 
     console.log(currentCompetency.examples);
      if (currentCompetency.examples !== undefined){
+         displayExamplesHeader(true);
          addCompetencyExamples(currentCompetency.examples);
+         competencyIsSelected = true;
      }
-     competencyIsSelected = true;
      setEntryButtonState(competencyIsSelected
         && notesHasValue);
+ 
 }
 
 function getAllExampleText(){
@@ -114,10 +117,21 @@ function getAllExampleText(){
 
 function setEntryButtonState(isEnabled){
     if (isEnabled){
-        document.querySelector("#SaveEntry").removeAttribute("disabled");
+        document.querySelector("#SaveEntry").removeAttribute("disabled","");
+        console.log("enabled");
     }
     else{
         document.querySelector("#SaveEntry").setAttribute("disabled","");
+        console.log("disabled");        
+    }
+}
+
+function displayExamplesHeader(isVisible){
+    if (isVisible){
+        examplesHeader.style.display = 'block';
+    }
+    else{
+        examplesHeader.style.display = 'none';
     }
 }
 

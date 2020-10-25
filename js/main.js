@@ -6,6 +6,7 @@ var screenNameButton;
 var screenName;
 var saveEntryButton;
 var notesTextArea;
+var examplesHeader;
 
 function initializeApp(){
     setEntryButtonState(false);
@@ -31,6 +32,10 @@ function initializeApp(){
     notesTextArea = document.querySelector("#notes");
     
     notesTextArea.addEventListener("input", notesTextArea_Change);
+
+    // initially hide examples header since no examples are shown
+    examplesHeader = document.querySelector("#supportingExamplesHdr");
+    displayExamplesHeader(false);
     
 
 //    initializeFirebase();
@@ -155,7 +160,7 @@ function notesTextArea_Change(){
 function saveEntryButton_Click(){
     const allExampleText = getAllExampleText();
     if (allExampleText.length < 1){
-        alert("I can't do this!");
+        $("#selectExampleWarnModal").modal('show');
         return;
     }
     else{
