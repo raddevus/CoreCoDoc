@@ -7,6 +7,9 @@ var screenName;
 var saveEntryButton;
 var notesTextArea;
 var examplesHeader;
+var setSecretButton;
+var saveSecretIdButton;
+var cancelSecretButton;
 
 function initializeApp(){
     setEntryButtonState(false);
@@ -27,6 +30,15 @@ function initializeApp(){
     $("#competencyGroup").on("change", setCompetencySelection);
     $("#competency").on("change", setCompetencyDescription);
     $("#revealSecretButton").on("click", toggleSecret)
+
+    setSecretButton = document.querySelector("#setSecretButton");
+    setSecretButton.addEventListener("click", setSecretButton_Click);
+
+    cancelSecretButton = document.querySelector("#cancelSecretIdButton");
+    cancelSecretButton.addEventListener("click", cancelSecretIdButton_Click);
+        
+    saveSecretIdButton = document.querySelector("#saveSecretIdButton");
+    saveSecretIdButton.addEventListener("click", saveSecretIdButton_Click);
     saveEntryButton = document.querySelector("#SaveEntry");
     saveEntryButton.addEventListener("click", saveEntryButton_Click);
     notesTextArea = document.querySelector("#notes");
@@ -38,14 +50,14 @@ function initializeApp(){
     displayExamplesHeader(false);
     
 
-//    initializeFirebase();
+    initializeFirebase();
     localUser = getLocalUser();
     if (localUser === null){
         addLocalUser();
         saveUserToFirebase();
     }
     displayUserId(localUser.id)
-//    loadUserFromFirebase();
+    loadUserFromFirebase();
     displayCurrentScreenName();
 
 }
@@ -72,6 +84,9 @@ function displayCurrentScreenName(){
     // only if the localUser is valid and the screenName is set
     if (localUser !== null && localUser.screenName != ""){
         $("#screenNameText").val(localUser.screenName);
+    }
+    else{
+        $("#screenNameText").val("");
     }
 }
 
@@ -109,6 +124,9 @@ function loadUserFromFirebase(){
     docRef.get().then(function(doc) {
         if (doc.exists) {
             console.log("Document data:", doc.data());
+            localUser = doc.data();
+            saveUserToLocalStorage();
+            displayCurrentScreenName();
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -166,6 +184,58 @@ function saveEntryButton_Click(){
     else{
         alert("Yep, you got it : " + allExampleText.join());
     }
+}
+
+// **************************************
+// *** Set Secret Button work
+// **************************************
+function setSecretButton_Click(){
+
+    // 1. determine that the user has indeed changed the SecretId value by 
+    // comparing value in text box to value in localStorage (localUser.id).
+
+    var secretIdInput = document.querySelector("#secretId");
+    console.log(secretIdInput.value);
+    if (secretIdInput.type != "text"){
+        alert("To save a new value, first you need to display the value and paste a new one in.");
+        return;
+    }
+    if (localUser.id !== secretIdInput.value){
+        if (shouldWarnUser()){
+            $("#saveSecretIdModal").modal('show');
+        }
+    }
+        
+    // toggleSecret();
+    // var secretIdInput = document.querySelector("#secretId");
+    // secretIdInput.focus();
+    // $("#secretId").select();
+    //secretIdInput
+
+    
+}
+
+function cancelSecretIdButton_Click(){
+    displayUserId(localUser.id);
+}
+
+function saveSecretIdButton_Click(){
+    
+    localUser.id =  document.querySelector("#secretId").value;
+    loadUserFromFirebase();
+}
+
+function shouldWarnUser(){
+    var secretIdWarning = localStorage.getItem("secretIdWarning");
+    console.log(secretIdWarning);
+    if (secretIdWarning === null || secretIdWarning == "true"){
+        return true;
+    }
+    return false;
+}
+
+function doNotWarnUserAboutSecretId(){
+    localStorage.setItem("secretIdWarning", "false");
 }
 
 class User{
