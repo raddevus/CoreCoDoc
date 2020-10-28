@@ -128,8 +128,9 @@ function loadUserFromFirebase(){
             saveUserToLocalStorage();
             displayCurrentScreenName();
         } else {
+            console.log("Couldn't set Secret Id: invalid value.");
             // doc.data() will be undefined in this case
-            console.log("No such document!");
+            $("#setSecretFailedModal").modal("show");
         }
     }).catch(function(error) {
         console.log("Error getting document:", error);
@@ -178,7 +179,7 @@ function notesTextArea_Change(){
 function saveEntryButton_Click(){
     const allExampleText = getAllExampleText();
     if (allExampleText.length < 1){
-        $("#selectExampleWarnModal").modal('show');
+        $("#selectExampleWarnModal").modal("show");
         return;
     }
     else{
@@ -197,22 +198,14 @@ function setSecretButton_Click(){
     var secretIdInput = document.querySelector("#secretId");
     console.log(secretIdInput.value);
     if (secretIdInput.type != "text"){
-        alert("To save a new value, first you need to display the value and paste a new one in.");
+        alert("To set a new Secret Id, first you need to display the value and paste a new one in.");
         return;
     }
     if (localUser.id !== secretIdInput.value){
         if (shouldWarnUser()){
-            $("#saveSecretIdModal").modal('show');
+            $("#saveSecretIdModal").modal("show");
         }
     }
-        
-    // toggleSecret();
-    // var secretIdInput = document.querySelector("#secretId");
-    // secretIdInput.focus();
-    // $("#secretId").select();
-    //secretIdInput
-
-    
 }
 
 function cancelSecretIdButton_Click(){

@@ -136,7 +136,26 @@
           </div>
         </div>
       </div>
-      <div class="modal fade" id="saveSecretIdModal" tabindex="-1" aria-labelledby="saveSecretIdModal" aria-hidden="true">
+      <div class="modal fade" id="setSecretFailedModal" tabindex="-1" aria-labelledby="ssMainLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="ssMainLabel">Set Secret Failed</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              The Secret Id you're attempting to set does not exist.<br>
+              Please make sure you've typed a valid Secret Id and try again.<br>
+              <h5>Hint</h5> Refresh the page (CTRL-F5) to restore your previous
+              Secret Id.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="saveSecretIdModal" tabindex="-1" data-backdrop="static"
+            aria-labelledby="saveSecretIdModal" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -146,7 +165,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>You are setting a new Secret Id value.  This will overwrite your current Secret Id and it will be lost forever.  Is that ok?</p>
+                <p>You are setting a new Secret Id value.  
+                    This will overwrite your current Secret Id and it will be lost 
+                    (unless you've copied it and saved it somewhere else).  Continue?</p>
             </div>
             <div class="modal-footer">
                 <button id="cancelSecretIdButton" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
