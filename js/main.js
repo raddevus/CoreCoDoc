@@ -242,7 +242,11 @@ function saveEntryToFirebase(){
     // by Firebase -- this can be fixed other ways later
     db.collection("journals").doc(localJournal.publicId.toString()).set(JSON.parse(JSON.stringify(localJournal)))
     .then(function() {
-        console.log("Document written successfully: " + localUser.id);
+        console.log("Journal Entry written successfully: " + localUser.id);
+        // Entry has been saved so reset all of the controls.
+        document.querySelector("#notes").value = "";
+        document.querySelector("#competencyGroup").selectedIndex = 0;
+        setCompetencySelection();
     })
     .catch(function(error) {
         console.error("Error adding document: ", error);
