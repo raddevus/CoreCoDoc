@@ -3,6 +3,7 @@
 // before the saveEntryButtonState will be true
 var competencyIsSelected = false;
 var notesHasValue = false;
+var currentCompetency;
 
 function setCompetencySelection(){
     competencyIsSelected = false;
@@ -92,7 +93,7 @@ function setCompetencyDescription(){
         displayExamplesHeader(false);
         return;
     }
-    var currentCompetency = JSON.parse($("#competency").val());
+    currentCompetency = JSON.parse($("#competency").val());
     
     console.log(currentCompetency.description);
     $("#competencyTitle").text(currentCompetency.text);

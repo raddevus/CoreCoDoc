@@ -1,6 +1,9 @@
 
 window.addEventListener("load",initializeApp);
 var localUser;
+var localJournal;
+var publicJournalId
+var localEntry;
 var db;
 var screenNameButton;
 var screenName;
@@ -58,6 +61,7 @@ function initializeApp(){
     }
     displayUserId(localUser.id)
     loadUserFromFirebase();
+    loadJournalFromFirebase();
     displayCurrentScreenName();
 
 }
@@ -138,6 +142,8 @@ function loadUserFromFirebase(){
 }
 
 function saveUserToFirebase(){
+    // REMEMBER! The odd JSON.stringify wrapped in a JSON.parse is a requirement
+    // by Firebase -- this can be fixed other ways later
     db.collection("users").doc(localUser.id.toString()).set(JSON.parse(JSON.stringify(localUser)))
     .then(function() {
         console.log("Document written successfully: " + localUser.id);
@@ -183,8 +189,64 @@ function saveEntryButton_Click(){
         return;
     }
     else{
-        alert("Yep, you got it : " + allExampleText.join());
+        var currentNotes = document.querySelector("#notes").value;
+        if (localJournal === undefined || localJournal === null){
+            var entries = [];
+            entries.push(new Entry({notes:currentNotes,group:currentCompetency.group,competency:currentCompetency.text,examples:allExampleText}));
+            localJournal = new Journal({ownerId:localUser.id,publicId:publicJournalId, entries:entries})
+        }
+        else{
+            localJournal.entries.push(new Entry({notes:currentNotes,group:currentCompetency.group,competency:currentCompetency.text,examples:allExampleText}));
+        }
+        
+        //alert("Yep, you got it : " + allExampleText.join());
+        saveEntryToFirebase();
+        console.log("Yep, you got it : " + allExampleText.join());
     }
+}
+
+function getPublicJournalIdFromLocalStorage(){
+    publicJournalId = localStorage.getItem("publicJournalId");
+}
+
+function setPublicJournalId(){
+    localStorage.setItem("publicJournalId",uuidv4());
+}
+
+function loadJournalFromFirebase(){
+
+    var journalRef;
+    getPublicJournalIdFromLocalStorage();
+    if (publicJournalId === null){
+        setPublicJournalId();
+        return;
+    }
+    journalRef = db.collection("journals").doc(publicJournalId);
+    
+    journalRef.get().then(function(journal) {
+        if (journal.exists) {
+            console.log("Journal data:", journal.data());
+            localJournal = journal.data();
+
+        } else {
+            console.log("Couldn't get Journal - doesn't exist.");
+            // doc.data() will be undefined in this case
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+}
+
+function saveEntryToFirebase(){
+    // REMEMBER! The odd JSON.stringify wrapped in a JSON.parse is a requirement
+    // by Firebase -- this can be fixed other ways later
+    db.collection("journals").doc(localJournal.publicId.toString()).set(JSON.parse(JSON.stringify(localJournal)))
+    .then(function() {
+        console.log("Document written successfully: " + localUser.id);
+    })
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
 }
 
 // **************************************
