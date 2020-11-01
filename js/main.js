@@ -63,6 +63,21 @@ function initializeApp(){
     loadJournalFromFirebase();
     displayCurrentScreenName();
 
+    // Handles which tab is selected
+    $("a[data-toggle='tab']").on("shown.bs.tab", function (e) {
+        switch (e.target.id){
+            case "journalTab" :{
+                displayJournal();
+                break;
+            }
+            case "mainTab" : {
+                break;
+            }
+        }
+        // console.log(e.target.id); // newly activated tab
+        // console.log(e.relatedTarget); // previous active tab
+      })
+
 }
 
 function displayUserId(userId){
