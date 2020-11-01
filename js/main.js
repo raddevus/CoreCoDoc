@@ -2,7 +2,6 @@
 window.addEventListener("load",initializeApp);
 var localUser;
 var localJournal;
-var publicJournalId
 var localEntry;
 var db;
 var screenNameButton;
@@ -193,7 +192,7 @@ function saveEntryButton_Click(){
         if (localJournal === undefined || localJournal === null){
             var entries = [];
             entries.push(new Entry({notes:currentNotes,group:currentCompetency.group,competency:currentCompetency.text,examples:allExampleText}));
-            localJournal = new Journal({ownerId:localUser.id,publicId:publicJournalId, entries:entries})
+            localJournal = new Journal({ownerId:localUser.id,publicId:localUser.publicId, entries:entries})
         }
         else{
             localJournal.entries.push(new Entry({notes:currentNotes,group:currentCompetency.group,competency:currentCompetency.text,examples:allExampleText}));
@@ -205,23 +204,11 @@ function saveEntryButton_Click(){
     }
 }
 
-function getPublicJournalIdFromLocalStorage(){
-    publicJournalId = localStorage.getItem("publicJournalId");
-}
-
-function setPublicJournalId(){
-    localStorage.setItem("publicJournalId",uuidv4());
-}
-
 function loadJournalFromFirebase(){
 
     var journalRef;
-    getPublicJournalIdFromLocalStorage();
-    if (publicJournalId === null){
-        setPublicJournalId();
-        return;
-    }
-    journalRef = db.collection("journals").doc(publicJournalId);
+
+    journalRef = db.collection("journals").doc(localUser.publicId);
     
     journalRef.get().then(function(journal) {
         if (journal.exists) {
@@ -240,7 +227,7 @@ function loadJournalFromFirebase(){
 function saveEntryToFirebase(){
     // REMEMBER! The odd JSON.stringify wrapped in a JSON.parse is a requirement
     // by Firebase -- this can be fixed other ways later
-    db.collection("journals").doc(localJournal.publicId.toString()).set(JSON.parse(JSON.stringify(localJournal)))
+    db.collection("journals").doc(localUser.publicId.toString()).set(JSON.parse(JSON.stringify(localJournal)))
     .then(function() {
         console.log("Journal Entry written successfully: " + localUser.id);
         // Entry has been saved so reset all of the controls.
@@ -300,6 +287,7 @@ function doNotWarnUserAboutSecretId(){
 class User{
     constructor(id){
         this.id = id;
+        this.publicId = uuidv4();
         this.screenName = "";
         this.created = new Date();
     }
