@@ -232,6 +232,7 @@ function saveEntryToFirebase(){
         console.log("Journal Entry written successfully: " + localUser.id);
         // Entry has been saved so reset all of the controls.
         document.querySelector("#notes").value = "";
+        notesHasValue = false;
         document.querySelector("#competencyGroup").selectedIndex = 0;
         setCompetencySelection();
     })
