@@ -1,6 +1,8 @@
 function displayJournal(){
     //alert("Journal tab has focus!");
-    addEntries();
+    if (localJournal !== null && localJournal !== undefined){
+        addEntries();
+    }
     console.log("got it!");
 }
 

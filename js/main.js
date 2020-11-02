@@ -60,7 +60,6 @@ function initializeApp(){
     }
     displayUserId(localUser.id)
     loadUserFromFirebase();
-    loadJournalFromFirebase();
     displayCurrentScreenName();
 
     // Handles which tab is selected
@@ -145,6 +144,7 @@ function loadUserFromFirebase(){
             localUser = doc.data();
             saveUserToLocalStorage();
             displayCurrentScreenName();
+            loadJournalFromFirebase();
         } else {
             console.log("Couldn't set Secret Id: invalid value.");
             // doc.data() will be undefined in this case
