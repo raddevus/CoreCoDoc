@@ -42,7 +42,7 @@ function addEntries(){
         //.append(document.createElement("div"))
         .append(document.createElement("br"))
         .append(localJournal.entries[x].notes)
-        
-        );
+        .append($(document.createElement("h5")).text("Supporting Examples") )
+      );
     }
 }
