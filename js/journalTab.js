@@ -32,9 +32,15 @@ function addEntries(){
         .append($(document.createElement("p"))
             .text("Supporting Examples")
             .prop({class:"exampleHeader"}))
+        .append($(document.createElement("ul"))
+            .append(localJournal.entries[x].examples.map(appendExamples)))
         .append($(document.createElement("hr")))
       );
     }
+}
+
+function appendExamples(item){
+    return $(document.createElement("li")).text(item);
 }
 
 // This helper formatDate function was obtained from : 
