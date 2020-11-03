@@ -300,7 +300,7 @@ const db07Examples = [
 
 const db08Examples = [
     "Notices and seizes profitable business opportunities.",
-    "Stays abreast of business, industry, and market information that may reveal business opportunities.",
+    "Stays updated on business, industry, and market information that may reveal business opportunities.",
     "Demonstrates willingness to take calculated risks to achieve business goals.",
     "Proposes innovative business deals to potential customers, suppliers, and business partners.",
     "Encourages and supports entrepreneurial behavior in others.",
