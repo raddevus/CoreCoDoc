@@ -20,7 +20,9 @@ function addEntries(){
         // 1. Add outer div to "#entries div"
         $("#entries").append($(document.createElement("div"))
         // 2. append strong text to div which contains competency name
-        .append($(document.createElement("strong")).text(localJournal.entries[x].competency))
+        .append($(document.createElement("strong"))
+            .text(localJournal.entries[x].competency)
+            .prop({class:"competencyHeader"}))
         // 3. append span add text which includes formatted created date and 
         //    add a class to the span (for styling purposes)
         .append($(document.createElement("span"))
