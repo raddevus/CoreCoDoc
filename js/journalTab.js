@@ -27,7 +27,10 @@ function addEntries(){
             .text(formatDate(localJournal.entries[x].created))
             .prop({class:"createdDate"}))
         .append($(document.createElement("p")).text(localJournal.entries[x].notes))
-        .append($(document.createElement("h5")).text("Supporting Examples") )
+        .append($(document.createElement("p"))
+            .text("Supporting Examples")
+            .prop({class:"exampleHeader"}))
+        .append($(document.createElement("hr")))
       );
     }
 }
