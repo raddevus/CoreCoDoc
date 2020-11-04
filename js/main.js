@@ -59,7 +59,7 @@ function initializeApp(){
         saveUserToFirebase();
     }
     displayUserId(localUser.id)
-    loadUserFromFirebase();
+    loadUserFromFirebase(false);
     displayCurrentScreenName();
 
     // Handles which tab is selected
@@ -135,7 +135,9 @@ function getLocalUser(){
     return user;
 }
 
-function loadUserFromFirebase(){
+function loadUserFromFirebase(isSettingSecret){
+    // isSettingSecret is used becuase this method is
+    // also called upon loading the page
     var docRef = db.collection("users").doc(localUser.id);
 
     docRef.get().then(function(doc) {
@@ -145,7 +147,7 @@ function loadUserFromFirebase(){
             saveUserToLocalStorage();
             displayCurrentScreenName();
             loadJournalFromFirebase();
-        } else {
+        } else if (isSettingSecret){
             console.log("Couldn't set Secret Id: invalid value.");
             // doc.data() will be undefined in this case
             $("#setSecretFailedModal").modal("show");
@@ -284,7 +286,7 @@ function cancelSecretIdButton_Click(){
 function saveSecretIdButton_Click(){
     
     localUser.id =  document.querySelector("#secretId").value;
-    loadUserFromFirebase();
+    loadUserFromFirebase(true);
 }
 
 function shouldWarnUser(){
