@@ -4,6 +4,7 @@
 var competencyIsSelected = false;
 var notesHasValue = false;
 var currentCompetency;
+let groupName;
 
 function setCompetencySelection(){
     competencyIsSelected = false;
@@ -23,17 +24,19 @@ function setCompetencySelection(){
     // add first item as blank
     $("#competency").append(new Option("select...", "00-00", false, false));
     
-
     switch (cgValue){
         case "cg-01":{
+            groupName = "Self Management";
             selfManagementCompetencies.map(mapToCompetency);
             break;
         }
         case "cg-02" :{
+            groupName = "Dealing With People";
             dealingWithOthersCompetencies.map(mapToCompetency);
             break;
         }
         case "cg-03":{
+            groupName = "Dealing With Business";
             dealingWithBusinessCompetencies.map(mapToCompetency);
             break;
         }
@@ -41,6 +44,9 @@ function setCompetencySelection(){
 }
 
 function mapToCompetency(item){
+    // This is kind of bad, because I'm using the value from the global
+    // just to set the group value.
+    item.group = groupName;
     var localOption = new Option(item.text, JSON.stringify(item), false, false);
     // console.log(localOption);
     $("#competency").append($(localOption));

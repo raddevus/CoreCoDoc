@@ -1,23 +1,23 @@
 
 window.addEventListener("load",initializeApp);
-var localUser;
-var localJournal;
-var localEntry;
-var db;
-var screenNameButton;
-var screenName;
-var saveEntryButton;
-var notesTextArea;
-var examplesHeader;
-var setSecretButton;
-var saveSecretIdButton;
-var cancelSecretButton;
+let localUser;
+let localJournal;
+let localEntry;
+let db;
+let screenNameButton;
+let screenName;
+let saveEntryButton;
+let notesTextArea;
+let examplesHeader;
+let setSecretButton;
+let saveSecretIdButton;
+let cancelSecretButton;
 
 function initializeApp(){
     setEntryButtonState(false);
     screenNameButton = document.querySelector("#screenNameButton");
     screenNameButton.addEventListener("click", () => {
-        var screenNameCtrl = document.querySelector("#screenNameText");
+        let screenNameCtrl = document.querySelector("#screenNameText");
         screenName = screenNameCtrl.value;
         if (screenName !== ""){
             localUser.screenName = screenName;
@@ -86,7 +86,7 @@ function displayUserId(userId){
 }
 
 function toggleSecret(){
-    var secretIdInput = document.querySelector("#secretId");
+    let secretIdInput = document.querySelector("#secretId");
     if (secretIdInput.type === "password") {
         secretIdInput.type = "text";
         document.querySelector("#revealSecretButton").innerHTML = "<svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-eye-slash' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z'/><path d='M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299l.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z'/><path d='M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709z'/><path fill-rule='evenodd' d='M13.646 14.354l-12-12 .708-.708 12 12-.708.708z'/></svg>";
@@ -120,13 +120,13 @@ function updateUser(){
     // updates the localUser in localStorage and
     // update the user at firebase
     saveUserToLocalStorage();
-    var docRef = db.collection("users").doc(localUser.id);
+    let docRef = db.collection("users").doc(localUser.id);
     docRef.update(JSON.parse(JSON.stringify(localUser)));
 }
 
 function getLocalUser(){
     console.log("getLocalUser()...");
-    var user = JSON.parse(localStorage.getItem("user"));
+    let user = JSON.parse(localStorage.getItem("user"));
     console.log(user);
     if (user === null){
         console.log("There is no user key.");
@@ -138,7 +138,7 @@ function getLocalUser(){
 function loadUserFromFirebase(isSettingSecret){
     // isSettingSecret is used becuase this method is
     // also called upon loading the page
-    var docRef = db.collection("users").doc(localUser.id);
+    let docRef = db.collection("users").doc(localUser.id);
 
     docRef.get().then(function(doc) {
         if (doc.exists) {
@@ -205,9 +205,9 @@ function saveEntryButton_Click(){
         return;
     }
     else{
-        var currentNotes = document.querySelector("#notes").value;
+        let currentNotes = document.querySelector("#notes").value;
         if (localJournal === undefined || localJournal === null){
-            var entries = [];
+            let entries = [];
             entries.push(new Entry({notes:currentNotes,group:currentCompetency.group,competency:currentCompetency.text,examples:allExampleText}));
             localJournal = new Journal({ownerId:localUser.id,publicId:localUser.publicId, entries:entries})
         }
@@ -223,7 +223,7 @@ function saveEntryButton_Click(){
 
 function loadJournalFromFirebase(){
 
-    var journalRef;
+    let journalRef;
 
     journalRef = db.collection("journals").doc(localUser.publicId);
     
@@ -266,7 +266,7 @@ function setSecretButton_Click(){
     // 1. determine that the user has indeed changed the SecretId value by 
     // comparing value in text box to value in localStorage (localUser.id).
 
-    var secretIdInput = document.querySelector("#secretId");
+    let secretIdInput = document.querySelector("#secretId");
     console.log(secretIdInput.value);
     if (secretIdInput.type != "text"){
         alert("To set a new Secret Id, first you need to display the value and paste a new one in.");
@@ -290,7 +290,7 @@ function saveSecretIdButton_Click(){
 }
 
 function shouldWarnUser(){
-    var secretIdWarning = localStorage.getItem("secretIdWarning");
+    let secretIdWarning = localStorage.getItem("secretIdWarning");
     console.log(secretIdWarning);
     if (secretIdWarning === null || secretIdWarning == "true"){
         return true;
