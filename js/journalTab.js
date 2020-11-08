@@ -16,7 +16,7 @@ function addEntries(){
         })
      )
 
-    for (var x = 0;x < localJournal.entries.length;x++){
+    for (let x = 0;x < localJournal.entries.length;x++){
         // 1. Add outer div to "#entries div"
         $("#entries").append($(document.createElement("div"))
         // 2. append strong text to div which contains competency name
@@ -46,7 +46,7 @@ function appendExamples(item){
 // This helper formatDate function was obtained from : 
 // https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd
 function formatDate(date) {
-    var d = new Date(date),
+    let d = new Date(date),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
         year = d.getFullYear();

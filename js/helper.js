@@ -1,14 +1,14 @@
 
 // set of bools which all must be true 
 // before the saveEntryButtonState will be true
-var competencyIsSelected = false;
-var notesHasValue = false;
-var currentCompetency;
+let competencyIsSelected = false;
+let notesHasValue = false;
+let currentCompetency;
 let groupName;
 
 function setCompetencySelection(){
     competencyIsSelected = false;
-    var cgValue = $("#competencyGroup").val();
+    let cgValue = $("#competencyGroup").val();
     $("#examples").remove();
     $("#competencyDescription").text("");
     $("#competency").empty();
@@ -47,7 +47,7 @@ function mapToCompetency(item){
     // This is kind of bad, because I'm using the value from the global
     // just to set the group value.
     item.group = groupName;
-    var localOption = new Option(item.text, JSON.stringify(item), false, false);
+    let localOption = new Option(item.text, JSON.stringify(item), false, false);
     // console.log(localOption);
     $("#competency").append($(localOption));
     // console.log(item.value + " : " +  item.text);
@@ -62,7 +62,7 @@ function addCompetencyExamples(examples){
         })
      )
 
-    for (var x = 0;x < examples.length;x++){
+    for (let x = 0;x < examples.length;x++){
         // NOTE: gen-chk is my special value used for
         // my script to determine which items are checked.
         console.log(examples[x]);
