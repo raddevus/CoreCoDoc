@@ -1,0 +1,8 @@
+name: core-co-doc
+static_sites:
+- environment_slug: html
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: raddevus/CoreCoDoc
+  name: core-co-doc

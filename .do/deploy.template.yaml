@@ -1,0 +1,8 @@
+spec:
+  name: core-co-doc
+  static_sites:
+  - environment_slug: html
+    git:
+      branch: main
+      repo_clone_url: https://github.com/raddevus/CoreCoDoc.git
+    name: core-co-doc
