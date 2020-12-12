@@ -13,9 +13,11 @@ let setSecretButton;
 let genQRCodeButton;
 let saveSecretIdButton;
 let cancelSecretButton;
+let qrImage;
 
 function initializeApp(){
     setEntryButtonState(false);
+    qrImage = document.querySelector("#qrCode");
     screenNameButton = document.querySelector("#screenNameButton");
     screenNameButton.addEventListener("click", () => {
         let screenNameCtrl = document.querySelector("#screenNameText");
@@ -263,11 +265,16 @@ function saveEntryToFirebase(){
     });
 }
 
+console.log(qrImage);
 function genQRCodeButton_Click(){
+    let qrForm = document.querySelector("#qrForm");
+    
+    qrForm.style.display = "block";
+    console.log(qrForm);
     let secretIdInput = document.querySelector("#secretId");
     fetch("http://uncoveryourlife.com/temp/GrabIt.aspx?url=https://newlibre.com/QRCodeGen/QREncoder/GenQR/?inText=" + secretIdInput.value)
         .then(response => response.text())
-        .then(data => console.log(data));
+        .then(data => qrImage.src = data);
 }
 
 // **************************************

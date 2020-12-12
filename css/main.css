@@ -33,3 +33,10 @@ h1{color:#0000ff; font-size:16px;font-weight:bold;font-family:sans-serif;}
 .createdDate{font-size:x-small;font-family:sans-serif;float:right;}
 .exampleHeader{font-size:small;font-family:sans-serif;font-weight:bold;}
 p{margin-bottom:5px;}
+#qrForm{display:none;
+  background:white;
+  position:absolute;
+  z-index: 99;
+  width:200px;height:200px;
+  border:#0000ff;
+  border-style:solid;}
