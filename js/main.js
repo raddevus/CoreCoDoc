@@ -265,16 +265,16 @@ function saveEntryToFirebase(){
     });
 }
 
-console.log(qrImage);
 function genQRCodeButton_Click(){
     let qrForm = document.querySelector("#qrForm");
     
     qrForm.style.display = "block";
     console.log(qrForm);
     let secretIdInput = document.querySelector("#secretId");
-    fetch("http://uncoveryourlife.com/temp/GrabIt.aspx?url=https://newlibre.com/QRCodeGen/QREncoder/GenQR/?inText=" + secretIdInput.value)
+    console.log(secretIdInput.value);
+    fetch("http://uncoveryourlife.com/temp/GrabIt.aspx?url=https://newlibre.com/QRCodeGen/QREncoder/GetBase64QR?inText=" + secretIdInput.value)
         .then(response => response.text())
-        .then(data => qrImage.src = data);
+        .then(data => qrImage.src="data:image/png;base64," + data);
 }
 
 // **************************************
