@@ -10,6 +10,7 @@ let saveEntryButton;
 let notesTextArea;
 let examplesHeader;
 let setSecretButton;
+let genQRCodeButton;
 let saveSecretIdButton;
 let cancelSecretButton;
 
@@ -35,6 +36,10 @@ function initializeApp(){
 
     setSecretButton = document.querySelector("#setSecretButton");
     setSecretButton.addEventListener("click", setSecretButton_Click);
+
+    genQRCodeButton = document.querySelector("#genQRButton");
+    genQRCodeButton.addEventListener("click", genQRCodeButton_Click);
+
 
     cancelSecretButton = document.querySelector("#cancelSecretIdButton");
     cancelSecretButton.addEventListener("click", cancelSecretIdButton_Click);
@@ -256,6 +261,13 @@ function saveEntryToFirebase(){
     .catch(function(error) {
         console.error("Error adding document: ", error);
     });
+}
+
+function genQRCodeButton_Click(){
+    let secretIdInput = document.querySelector("#secretId");
+    fetch("http://uncoveryourlife.com/temp/GrabIt.aspx?url=https://newlibre.com/QRCodeGen/QREncoder/GenQR/?inText=" + secretIdInput.value)
+        .then(response => response.text())
+        .then(data => console.log(data));
 }
 
 // **************************************
