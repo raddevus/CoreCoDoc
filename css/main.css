@@ -36,7 +36,9 @@ p{margin-bottom:5px;}
 #qrForm{display:none;
   background:white;
   position:absolute;
+  top: 50%;
+  left: 50%;
   z-index: 99;
-  width:200px;height:200px;
+  width:190px;height:190px;
   border:#0000ff;
   border-style:solid;}
