@@ -3,6 +3,9 @@ function displayJournal(){
     if (localJournal !== null && localJournal !== undefined){
         addEntries();
     }
+    else{
+        $("#entries").remove();
+    }
     console.log("got it!");
 }
 
