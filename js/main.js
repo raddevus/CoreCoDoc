@@ -300,7 +300,7 @@ function genQRCodeButton_Click(){
     console.log(qrForm);
     let secretIdInput = document.querySelector("#secretId");
     console.log(secretIdInput.value);
-    fetch("http://uncoveryourlife.com/temp/GrabIt.aspx?url=https://newlibre.com/QRCodeGen/QREncoder/GetBase64QR?inText=" + secretIdInput.value)
+    fetch("https://newlibre.com/QRCodeGen/QREncoder/GetBase64QR?inText=" + secretIdInput.value)
         .then(response => response.text())
         .then(data => qrImage.src="data:image/png;base64," + data)
         .then(qrFormIsVisible = true);
