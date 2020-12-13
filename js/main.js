@@ -14,8 +14,10 @@ let genQRCodeButton;
 let saveSecretIdButton;
 let cancelSecretButton;
 let qrImage;
+let qrFormIsVisible = false;
 
 function initializeApp(){
+    document.body.addEventListener("mouseup", body_mouseup);
     setEntryButtonState(false);
     qrImage = document.querySelector("#qrCode");
     screenNameButton = document.querySelector("#screenNameButton");
@@ -274,7 +276,16 @@ function genQRCodeButton_Click(){
     console.log(secretIdInput.value);
     fetch("http://uncoveryourlife.com/temp/GrabIt.aspx?url=https://newlibre.com/QRCodeGen/QREncoder/GetBase64QR?inText=" + secretIdInput.value)
         .then(response => response.text())
-        .then(data => qrImage.src="data:image/png;base64," + data);
+        .then(data => qrImage.src="data:image/png;base64," + data)
+        .then(qrFormIsVisible = true);
+}
+
+function body_mouseup(){
+    if (qrFormIsVisible){
+        let qrForm = document.querySelector("#qrForm");
+        qrForm.style.display = "none";
+        qrFormIsVisible = false;
+    }
 }
 
 // **************************************
