@@ -17,6 +17,7 @@ let setOriginalButton;
 let qrImage;
 let qrFormIsVisible = false;
 let secretIsDisplayed = false;
+let setCurrentAsOrig = false;
 
 function initializeApp(){
     document.body.addEventListener("mouseup", body_mouseup);
@@ -151,6 +152,10 @@ function addLocalUser(){
 
 function saveUserToLocalStorage(){
     localStorage.setItem("user",JSON.stringify(localUser));
+    if (setCurrentAsOrig){
+        saveOriginalSecretIdToLocalStorage(localUser.id);
+        setCurrentAsOrig = false;
+    }
 }
 
 function saveOriginalSecretIdToLocalStorage(id){
@@ -335,6 +340,16 @@ function isOriginalSecretLoaded(){
 function setCurrentSecretAsOrig_Click(){
     console.log("test code..");
     console.log("secretIsDisplayed : " + secretIsDisplayed);
+    let secretIdInput = document.querySelector("#secretId");
+    // If the stored id is not any different than one in
+    // the secret id input then there is no work to do.
+    if (localUser.id !== secretIdInput.value){
+        if (secretIsDisplayed){
+            localUser.id =  document.querySelector("#secretId").value;
+            setCurrentAsOrig = true;
+            loadUserFromFirebase(true);
+        }
+    }
 }
 
 function setOriginalButton_Click(){
