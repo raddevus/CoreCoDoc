@@ -50,9 +50,16 @@ function initializeApp(){
 
     cancelSecretButton = document.querySelector("#cancelSecretIdButton");
     cancelSecretButton.addEventListener("click", cancelSecretIdButton_Click);
+
+    cancelOriginalSecretIdButton = document.querySelector("#cancelOriginalSecretIdButton");
+    cancelOriginalSecretIdButton.addEventListener("click", cancelSecretIdButton_Click);
         
     saveSecretIdButton = document.querySelector("#saveSecretIdButton");
     saveSecretIdButton.addEventListener("click", saveSecretIdButton_Click);
+
+    setOriginalSecretIdButton = document.querySelector("#setOriginalSecretIdButton");
+    setOriginalSecretIdButton.addEventListener("click", handleUserConfirmedSetOriginalSecret);
+
     saveEntryButton = document.querySelector("#SaveEntry");
     saveEntryButton.addEventListener("click", saveEntryButton_Click);
     notesTextArea = document.querySelector("#notes");
@@ -346,11 +353,16 @@ function setCurrentSecretAsOrig_Click(){
     // the secret id input then there is no work to do.
     if (localUser.id !== secretIdInput.value){
         if (secretIsDisplayed){
-            localUser.id =  document.querySelector("#secretId").value;
-            setCurrentAsOrig = true;
-            loadUserFromFirebase(true);
+            $("#setOriginalSecretIdModal").modal("show");
         }
     }
+}
+
+function handleUserConfirmedSetOriginalSecret(){
+    console.log("in here...");
+    localUser.id =  document.querySelector("#secretId").value;
+    setCurrentAsOrig = true;
+    loadUserFromFirebase(true);
 }
 
 function setOriginalButton_Click(){
