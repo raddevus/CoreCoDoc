@@ -199,6 +199,7 @@ function loadUserFromFirebase(isSettingSecret){
             console.log("Couldn't set Secret Id: invalid value.");
             // doc.data() will be undefined in this case
             $("#setSecretFailedModal").modal("show");
+            displaySecretIdCloudButton();
         }
     }).catch(function(error) {
         console.log("Error getting document:", error);
