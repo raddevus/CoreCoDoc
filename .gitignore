@@ -46,3 +46,5 @@ testem.log
 Thumbs.db
 # ignore my secrets.ig file which contains apikey
 *.ig
+# ignore queries directory where I keep common firebase queries & data
+queries/
