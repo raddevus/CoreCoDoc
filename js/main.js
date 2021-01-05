@@ -319,7 +319,15 @@ function saveEntryToFirebase(){
 }
 
 function deleteEntriesButton_Click(){
-    getSelectedEntries();
+    var allSelectedEntries = getSelectedEntries();
+    if (allSelectedEntries.length <= 0){
+        // no entries have been selected
+        return;
+    }
+    
+    allSelectedEntries.forEach((item) => {
+        console.log(item.split("entry-")[1]);
+    })
 }
 
 function genQRCodeButton_Click(){
