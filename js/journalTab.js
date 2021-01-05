@@ -71,6 +71,7 @@ function appendExamples(item){
 
 function getSelectedEntries(){
     const allSelectedExamples = [...document.querySelectorAll('.entry-chk:checked')].map(e => e.id);
+    console.log("There are " + allSelectedExamples.length + " entries selected");
     return allSelectedExamples;
 }
 

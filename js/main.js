@@ -14,6 +14,7 @@ let genQRCodeButton;
 let saveSecretIdButton;
 let cancelSecretButton;
 let setOriginalButton;
+let deleteEntriesButton;
 let qrImage;
 let qrFormIsVisible = false;
 let secretIsDisplayed = false;
@@ -66,6 +67,9 @@ function initializeApp(){
     notesTextArea.addEventListener("input", notesTextArea_Change);
     setOriginalButton = document.querySelector("#setOriginalButton");
     setOriginalButton.addEventListener("click", setOriginalButton_Click);
+
+    deleteEntriesButton = document.querySelector("#deleteEntries");
+    deleteEntriesButton.addEventListener("click", deleteEntriesButton_Click);
 
     // initially hide examples header since no examples are shown
     examplesHeader = document.querySelector("#supportingExamplesHdr");
@@ -312,6 +316,10 @@ function saveEntryToFirebase(){
     .catch(function(error) {
         console.error("Error adding document: ", error);
     });
+}
+
+function deleteEntriesButton_Click(){
+    getSelectedEntries();
 }
 
 function genQRCodeButton_Click(){
