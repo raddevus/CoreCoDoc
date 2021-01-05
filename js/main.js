@@ -15,10 +15,12 @@ let saveSecretIdButton;
 let cancelSecretButton;
 let setOriginalButton;
 let deleteEntriesButton;
+let confirmDeleteButton;
 let qrImage;
 let qrFormIsVisible = false;
 let secretIsDisplayed = false;
 let setCurrentAsOrig = false;
+let allSelectedEntries;
 
 function initializeApp(){
     document.body.addEventListener("mouseup", body_mouseup);
@@ -70,6 +72,8 @@ function initializeApp(){
 
     deleteEntriesButton = document.querySelector("#deleteEntries");
     deleteEntriesButton.addEventListener("click", deleteEntriesButton_Click);
+    confirmDeleteButton = document.querySelector("#confirmDelete");
+    confirmDeleteButton.addEventListener("click", confirmDeleteButton_Click);
 
     // initially hide examples header since no examples are shown
     examplesHeader = document.querySelector("#supportingExamplesHdr");
@@ -319,16 +323,30 @@ function saveEntryToFirebase(){
 }
 
 function deleteEntriesButton_Click(){
-    var allSelectedEntries = getSelectedEntries();
+    allSelectedEntries = getSelectedEntries();
     if (allSelectedEntries.length <= 0){
         // no entries have been selected
-        $("#selectEntriesWarnModal").modal("show");
+        $("#NoEntriesSelectedWarnModal").modal("show");
         return;
     }
-    
-    allSelectedEntries.forEach((item) => {
-        console.log(item.split("entry-")[1]);
-    })
+    $("#deleteEntriesConfirmModal").modal("show");
+}
+
+function confirmDeleteButton_Click(){
+    for (let i = allSelectedEntries.length-1; i >= 0 ;i--){
+        let currentEntryIdx = allSelectedEntries[i].split("entry-")[1];
+        //splice() is delete currentEntryIdx, 1 (1 item)
+        console.log("deleting currentEntryIdx : " + currentEntryIdx);
+        localJournal.entries.splice(currentEntryIdx,1);
+        console.log("there are now " + localJournal.length + " entries.");
+    }
+    // we only got into this method because at least one
+    // entry was chosen to be deleted, so now we'll update
+    // the firebase store with the updated localJournal Entries 
+    // ie - the localJournal minus the deleted entries.
+    saveEntryToFirebase();
+    // call displayJournal() method to refresh the entry view.
+    displayJournal();
 }
 
 function genQRCodeButton_Click(){

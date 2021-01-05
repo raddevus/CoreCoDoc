@@ -254,7 +254,7 @@
         </div>
         </div>
     </div>
-    <div class="modal fade" id="selectEntriesWarnModal" tabindex="-1" aria-labelledby="mainLabel" aria-hidden="true">
+    <div class="modal fade" id="NoEntriesSelectedWarnModal" tabindex="-1" aria-labelledby="mainLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -267,6 +267,26 @@
               You must select at least one Journal Entry from the list
                that you want to delete.  Please select one or more entries
                and try again.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="deleteEntriesConfirmModal" tabindex="-1"
+        aria-labelledby="deleteEntriesConfirmModal" aria-hidden="true"
+        data-backdrop="static">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Delete Entries?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to permanently delete the selected entries?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button id="confirmDelete" type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
             </div>
           </div>
         </div>
