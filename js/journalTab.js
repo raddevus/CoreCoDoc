@@ -21,29 +21,57 @@ function addEntries(){
 
     for (let x = 0;x < localJournal.entries.length;x++){
         // 1. Add outer div to "#entries div"
-        $("#entries").append($(document.createElement("div"))
-        // 2. append strong text to div which contains competency name
-        .append($(document.createElement("strong"))
-            .text(localJournal.entries[x].competency)
-            .prop({class:"competencyHeader"}))
-        // 3. append span add text which includes formatted created date and 
-        //    add a class to the span (for styling purposes)
-        .append($(document.createElement("span"))
-            .text(formatDate(localJournal.entries[x].created))
-            .prop({class:"createdDate"}))
-        .append($(document.createElement("p")).text(localJournal.entries[x].notes))
-        .append($(document.createElement("p"))
-            .text("Supporting Examples")
-            .prop({class:"exampleHeader"}))
-        .append($(document.createElement("ul"))
-            .append(localJournal.entries[x].examples.map(appendExamples)))
-        .append($(document.createElement("hr")))
-      );
+        $("#entries").append(
+            $(document.createElement("div"))
+            .prop({
+                id:"entryDiv-"+x
+            })
+            .prop({
+                class:"form-check noselect",
+                }).append(
+                    $(document.createElement("input")).prop({
+                    id: "entry-" + x,
+                    name: localJournal.entries[x].id,
+                    //value: ,
+                    type: "checkbox",
+                    class:"form-check-input entry-chk",
+                    })
+                )
+            .append(
+                $(document.createElement("label"))
+                .prop({
+                    for: "entry-" + x,
+                })
+                // 2. append strong text to div which contains competency name
+                .append($(document.createElement("strong"))
+                    .text(localJournal.entries[x].competency)
+                    .prop({class:"competencyHeader"}))
+            )
+            // 3. append span add text which includes formatted created date and 
+            //    add a class to the span (for styling purposes)
+            .append($(document.createElement("span"))
+                .text(formatDate(localJournal.entries[x].created))
+                .prop({class:"createdDate"}))
+            .append($(document.createElement("p")).text(localJournal.entries[x].notes))
+            .append($(document.createElement("p"))
+                .text("Supporting Examples")
+                .prop({class:"exampleHeader"}))
+            .append($(document.createElement("ul"))
+                .append(localJournal.entries[x].examples.map(appendExamples)))
+            .append($(document.createElement("hr")))
+        )
+        
+        
     }
 }
 
 function appendExamples(item){
     return $(document.createElement("li")).text(item);
+}
+
+function getSelectedEntries(){
+    const allSelectedExamples = [...document.querySelectorAll('.entry-chk:checked')].map(e => e.id);
+    return allSelectedExamples;
 }
 
 // This helper formatDate function was obtained from : 
