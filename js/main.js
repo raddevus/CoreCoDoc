@@ -322,6 +322,7 @@ function deleteEntriesButton_Click(){
     var allSelectedEntries = getSelectedEntries();
     if (allSelectedEntries.length <= 0){
         // no entries have been selected
+        $("#selectEntriesWarnModal").modal("show");
         return;
     }
     
